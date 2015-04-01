@@ -1,0 +1,52 @@
+--- mod_auth_radius-1.5.8/httpd.conf.orig	2009-05-16 10:31:47.000000000 +0200
++++ mod_auth_radius-1.5.8/httpd.conf	2015-03-31 19:17:59.353023737 +0200
+@@ -1,14 +1,7 @@
+ ######################################################################
+-#  Modifications to the httpd.conf file for mod_auth_radius.c
++#  Additions to the httpd.conf file for mod_auth_radius.c
+ #  written by Alan DeKok <aland@freeradius.org>
+ #
+-#  Version: $Id$
+-#
+-######################################################################
+-#
+-#  These configuration options should be ADDED to the httpd.conf file
+-#  for your site.
+-#
+ ######################################################################
+ 
+ 
+@@ -16,17 +9,12 @@
+ #
+ # Tell Apache to load the module.
+ #
+-LoadModule radius_auth_module   libexec/mod_auth_radius.so
+-# the path to the module file will depend on your Apache installation, e.g.
+-#LoadModule radius_auth_module /usr/lib/apache2/modules/mod_auth_radius.so
++LoadModule radius_auth_module   modules/mod_auth_radius.so
+ 
+ ######################################################################
+ #
+ # With Apache 1.x, it is necessary to add an 'AddModule' statement.
+-#  The order of the modules listed by 'AddModule' can be important.
+-# This seems to work:
+-# just AFTER 'AddModule mod_auth.c' add:
+-# AddModule mod_auth_radius.c
++AddModule mod_auth_radius.c
+ 
+ 
+ ######################################################################
+@@ -106,13 +94,6 @@
+ #
+ #AuthRadiusAuthoritative on
+ 
+-# Apache 2.x specific setting:
+-#
+-# Set RADIUS to be the provider for this basic authentication
+-#
+-AuthBasicProvider radius
+-
+-
+ #
+ # Make a local variation of AddRadiusCookieValid.  The server will choose
+ # the MINIMUM of the two values.
