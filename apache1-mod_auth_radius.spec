@@ -35,7 +35,7 @@ uwierzytelnianie potrzebny jest własny serwer RADIUS.
 
 %prep
 %setup -q -n mod_auth_radius-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{apxs} -c mod_auth_radius.c -o mod_auth_radius.so
